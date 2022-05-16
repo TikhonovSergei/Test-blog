@@ -127,3 +127,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+testblog/testblogapp/migrations/0002_blogs_bloguser_posts.py
+testblog/testblogapp/migrations/0003_posts_read.py
