@@ -1,0 +1,48 @@
+{% load static %}
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="" />
+<meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+<meta http-equiv="PRAGMA" content="NO-CACHE" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<title>Блог тестовый</title>
+<link rel="stylesheet" type="text/css" href={% static "testblogapp/skin.css" %} />
+
+<script>
+csrf_token = '{{ csrf_token }}';
+</script>
+</head>
+
+
+<body class=role_{{  rol_user }}>
+
+{% block header %}
+{% if  user %}
+	<div class=userinfo> Вы вошли как : {{ user.username }} <br></div>
+
+<a href="{% url 'testblogapp:index' %}" class=logout>Выйти</a>
+{% else %}
+<a href="{% url 'testblogapp:user_login' %}" >Войти</a>
+{% endif %}
+</header>
+{% endblock header %}
+
+<section>
+{% block content%}
+
+{% endblock content %}
+</section>
+{% block footer%}
+<footer>
+<div>
+	<div id=tel class=tel><h1>Телефоны:</h1><ul><li>+7(800) 000 00 00 (бесплатный)</li><li>+7(000) 000 00 00</li><li>+7(000) 000 00 00</li></ul></div>
+	<div id=mail class=mail><h1>Электронная почта:</h1><ul><li><a href="test@test.ru" target="_blank">test@test.ru</a></li></ul></div>
+</div>
+</footer>
+{% endblock footer%}
+</body></html>
