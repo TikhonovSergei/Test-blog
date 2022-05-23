@@ -1,0 +1,25 @@
+﻿{% extends "testblogapp/base.html" %}
+{% load static %}
+
+
+{% block content%}
+<h1> Ошибка уровня доступа пользователя</h1>
+{% if p_activ == 1  %}
+	<div class=error>У вас недостаточно прав для просмотра этой страницы. <br</div>
+	<h2>У вас недостаточно прав для просмотра этой страницы. <br></h2>
+	<div>
+{% elif p_activ == O  %}
+	<div class=error>Пользователь больше неактивен в ИС "МИР ребенка" <br</div>
+	<a href="{% url 'testblogapp:user_login' %}" class="btn">Ок</a>
+{% elif p_activ == 2  %}
+	{% if m_error != None  %}<div class=error>{{m_error}}<br></div>{% endif %}
+	<a href="{% url 'testblogapp:user_login' %}" class="btn">Ок</a>
+	<br>
+{% elif p_activ == 3  %}
+	<div class=error>Ошибка базы данных пользователь не найден. Обратитесь, пожалуйста, в службу технической поддержки.<br</div>
+	<a href="{% url 'testblogapp:user_login' %}" class="btn">Ок</a>
+{% endif %}
+</div>
+
+
+{% endblock content %}

@@ -13,19 +13,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
 from django.urls import  path
-from . import views
 from django.conf.urls import  url
-from django.conf.urls.static import static
-from django.views.i18n import JavaScriptCatalog
+from . import views
 from django.conf import settings
+from rest_framework import routers
+
 
 app_name = 'testblogapp'
 
+
+
 urlpatterns = [
-    #url(r'login/$', login_view, name='login'),
-    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    path('', views.index, name='index'),
+    url('user_login/$', views.user_login, name='user_login'),
+    path('str_user', views.str_user, name='str_user'),
 ]
+
+
+
 
 

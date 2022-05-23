@@ -1,0 +1,31 @@
+﻿{% extends "testblogapp/base.html" %}
+{% load static %}
+
+
+{% block header%}
+<header><img src={% static "testblogapp/img/logo.svg" %} class=logo></header>
+{% endblock header %}
+
+{% block content%}
+
+	{% block forms%}
+	<div class="auth"><form method="POST">
+		{% csrf_token %}
+		<table width="100%">	
+			<tr>
+				<th>Логин:</th>
+				<td>{{ form.username }}</td>
+			</tr>
+			<tr>
+				<th>Пароль:</th>
+				<td>{{ form.password }}</td>
+			</tr>
+		</table>
+		<input type="submit" value="Войти" class="btn_login btn">
+		</form>
+	</div>
+	{% endblock forms%}
+	
+</div>
+
+{% endblock content %}
