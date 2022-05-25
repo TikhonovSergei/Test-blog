@@ -18,3 +18,15 @@ class UserLogIn(AuthenticationForm):
         cleaned_data = super().clean()
         user_n = self.cleaned_data.get('username')
         password_n = self.cleaned_data.get('password')
+
+class CreatePostForm(forms.ModelForm):
+    class Meta:
+        model = Posts
+        fields = ['title_post', 'text_post',]
+        labels = {
+            'title_post': 'Заголовок поста:',
+            'text_post': 'Текст поста :',
+        }
+        widgets = {
+            "text_post": Textarea(attrs={'cols': 40, 'rows': 4}),
+        }

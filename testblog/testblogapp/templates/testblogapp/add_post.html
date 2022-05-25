@@ -1,0 +1,13 @@
+﻿{% extends "testblogapp/base.html" %}
+{% load static %}
+
+
+{% block content%}
+<h1>Добавление поста в свой блог</h1>
+<form  method="POST">{% csrf_token %}
+{{form_post}}
+<input type="submit" class="btn" id=next value="Опубликовать" >
+</form>
+
+
+{% endblock content %}

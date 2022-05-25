@@ -1,0 +1,36 @@
+﻿{% extends "testblogapp/base.html" %}
+{% load static %}
+
+
+{% block content%}
+<a href="str_user" class="btn">К ленте новостей</a>
+<h1>Список блогов</h1>
+{% if blog_lst %}
+<form  method="POST">{% csrf_token %}
+<table>
+    <head><th>Название блога</th><th>Владелец блога</th><th>Подписка</th></head>
+    {% for blog in  blog_lst %}
+        
+        <tr><th>{{blog.name_blog}}</th><td>{{blog.user}}</td>
+            <td> 
+            {% if blog.bloguser_set.all %}
+                {% for user_blog in  blog.bloguser_set.all %}
+                    {% if user_blog.user == user %}
+                        {% if user_blog.signed %}
+                            <h1>Подписан</h1><input type="submit" class="btn" id=next value="Отписаться" name="no_{{blog.pk}}">
+                        {% else %}
+                            <h1>НЕ подписан</h1><input type="submit" class="btn" id=next value="Подписаться" name="pk_{{blog.pk}}">
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <h1>НЕ подписан</h1><input type="submit" class="btn" id=next value="Подписаться" name="pk_{{blog.pk}}">
+            {% endif %}
+            </td></tr>
+
+    {% endfor %}
+</table>
+</form>
+{% endif %}
+
+{% endblock content %}
