@@ -22,6 +22,11 @@ class Posts(models.Model):
 
     def __str__(self):
         return self.title_post
+    
+    def save(self, *args, **kwargs):
+        data = super(Posts, self).save(*args, **kwargs)
+
+        #send_mail(subject,mess,from_mail,[to_mail],fail_silently=True)
 
 class BlogUser(models.Model):
     blog = models.ForeignKey(Blogs, on_delete=models.PROTECT)

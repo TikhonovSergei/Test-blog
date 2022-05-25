@@ -1,0 +1,21 @@
+﻿{% extends "testblogapp/base.html" %}
+{% load static %}
+
+
+{% block content%}
+<a href="add_post" class="btn">Добавить пост</a> <a href="str_user" class="btn">К ленте новостей</a> 
+<h1>Мои посты</h1>
+{% if post_lst %}
+<form  method="POST">{% csrf_token %}
+<table>
+    <head><th>Заголовок поста</th><th>Текст поста</th></head>
+    {% for post in  post_lst %}
+        
+        <tr><th>{{post.title_post}}</th><td>{{post.text_post}}</td></tr>
+
+    {% endfor %}
+</table>
+</form>
+{% endif %}
+
+{% endblock content %}

@@ -3,7 +3,7 @@
 
 
 {% block content%}
-<a href="" class="btn">Мой блог</a> <a href="" class="btn">Остальные блоги</a> 
+<a href="my_blog" class="btn">Мой блог</a> <a href="str_blogs" class="btn">Остальные блоги</a> 
 <h1>Лента новостей</h1>
 {% if post_lst %}
 <form  method="POST">{% csrf_token %}
@@ -11,7 +11,22 @@
     <head><th>Заголовок поста</th><th>Текст поста</th><th>Прочитан/не прочитано</th></head>
     {% for post in  post_lst %}
         
-        <tr><th>{{post.title_post}}</th><td>{{post.text_post}}</td><td><input type="submit" class="btn" id=next value="Прочитано" name="pk_{{post.pk}}"></td></tr>
+        <tr><th>{{post.title_post}}</th><td>{{post.text_post}}</td>
+            <td> 
+            {% if post.postuser_set.all %}
+                {% for user_post in  post.postuser_set.all %}
+                    {% if user_post.user == user %}
+                        {% if user_post.read %}
+                            <h1>Прочитано</h1><input type="submit" class="btn" id=next value="Пометить как НЕ прочитано" name="no_{{post.pk}}">
+                        {% else %}
+                            <h1>НЕ Прочитано</h1><input type="submit" class="btn" id=next value="Пометить как Прочитано" name="pk_{{post.pk}}">
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <h1>НЕ Прочитано</h1><input type="submit" class="btn" id=next value="Пометить как Прочитано" name="pk_{{post.pk}}">
+            {% endif %}
+            </td></tr>
 
     {% endfor %}
 </table>
