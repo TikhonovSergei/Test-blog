@@ -6,10 +6,6 @@ from django.contrib.auth.models import User, AbstractUser, BaseUserManager
 class MyUserManager(BaseUserManager):
     pass
 '''
-class User(User):
-
-    def __str__(self):
-        return f"{self.username}"
 
 class Blogs(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT, primary_key = True)

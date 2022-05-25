@@ -130,3 +130,4 @@ dmypy.json
 testblog/testblogapp/migrations/0002_blogs_bloguser_posts.py
 testblog/testblogapp/migrations/0003_posts_read.py
 testblog/testblogapp/migrations/0004_auto_20220517_0139.py
+testblog/testblogapp/migrations/0005_auto_20220523_0628.py
