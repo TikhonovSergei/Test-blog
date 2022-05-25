@@ -3,7 +3,19 @@
 
 
 {% block content%}
+<a href="" class="btn">Мой блог</a> <a href="" class="btn">Остальные блоги</a> 
+<h1>Лента новостей</h1>
+{% if post_lst %}
+<form  method="POST">{% csrf_token %}
+<table>
+    <head><th>Заголовок поста</th><th>Текст поста</th><th>Прочитан/не прочитано</th></head>
+    {% for post in  post_lst %}
+        
+        <tr><th>{{post.title_post}}</th><td>{{post.text_post}}</td><td><input type="submit" class="btn" id=next value="Прочитано" name="pk_{{post.pk}}"></td></tr>
 
-<div> Здравствуйте. Для начала работы зарегистрируйтесь пожалуйста.</div>
+    {% endfor %}
+</table>
+</form>
+{% endif %}
 
 {% endblock content %}

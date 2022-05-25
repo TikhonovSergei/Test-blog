@@ -44,9 +44,24 @@ def user_login(request):
 def str_user(request):
     '''Страница пользователя'''
     user = request.user
-    print(user)
+    print(user.pk)
+    blog_my = Blogs.objects.get(user = user)
+    blog_user_lst = Blogs.objects.filter(bloguser__user = user, bloguser__signed = True)
+    post_lst = Posts.objects.filter(blog = blog_my)
+    for blog_user in blog_user_lst:
+        post_lst_add = Posts.objects.filter(blog = blog_user)
+        post_lst = post_lst.union(post_lst_add)
+    post_lst = post_lst.order_by('-date_time_add')
     if request.method == "POST":
         req_post = request.POST
+        for key_post in req_post:
+            if key_post.find('pk_') == 0:
+                pk_post = int(key_post[3:])
+                post = Posts.objects.get(pk = pk_post)
+                if PostUser.objects.filter(user = user, post = post).exists() == False:
+                    post_user = PostUser(user = user, post = post, read = True)
+                    post_user.save()
+        return redirect('testblogapp:str_user', permanent=True)
     else:
-        val_data = {}
+        val_data = {'post_lst': post_lst,}
         return render(request, 'testblogapp/str_user.html', val_data)
