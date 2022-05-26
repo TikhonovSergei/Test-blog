@@ -13,19 +13,13 @@
         
         <tr><th>{{blog.name_blog}}</th><td>{{blog.user}}</td>
             <td> 
-            {% if blog.bloguser_set.all %}
                 {% for user_blog in  blog.bloguser_set.all %}
-                    {% if user_blog.user == user %}
-                        {% if user_blog.signed %}
-                            <h1>Подписан</h1><input type="submit" class="btn" id=next value="Отписаться" name="no_{{blog.pk}}">
-                        {% else %}
-                            <h1>НЕ подписан</h1><input type="submit" class="btn" id=next value="Подписаться" name="pk_{{blog.pk}}">
-                        {% endif %}
+                    {% if user_blog.user == user and user_blog.signed %}
+                        <h1>Подписан</h1><input type="submit" class="btn" id=next value="Отписаться" name="no_{{blog.pk}}">
+                    {% elif user_blog.user == user and user_blog.signed == False%}
+                        <h1>НЕ подписан</h1><input type="submit" class="btn" id=next value="Подписаться" name="pk_{{blog.pk}}">
                     {% endif %}
                 {% endfor %}
-            {% else %}
-                <h1>НЕ подписан</h1><input type="submit" class="btn" id=next value="Подписаться" name="pk_{{blog.pk}}">
-            {% endif %}
             </td></tr>
 
     {% endfor %}

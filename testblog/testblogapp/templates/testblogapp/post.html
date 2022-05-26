@@ -1,0 +1,11 @@
+﻿{% extends "testblogapp/base.html" %}
+{% load static %}
+
+
+{% block content%}
+<a href="str_user" class="btn">К ленте новостей</a>
+<h1>Блог: {{post.blog}}</h1>
+<h2>Блог: {{post.title_post}}</h2>
+<h3>Блог: {{post.text_post}}</h3>
+
+{% endblock content %}

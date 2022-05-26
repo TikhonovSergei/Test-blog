@@ -32,6 +32,7 @@ urlpatterns = [
     path('str_blogs', views.str_blogs, name='str_blogs'),
     path('my_blog', views.my_blog, name='my_blog'),
     path('add_post', views.add_post, name='add_post'),
+    path('post)view/<int:pk_post>/', views.post_view, name='post_view'),
 ]
 
 
