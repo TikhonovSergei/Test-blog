@@ -1,6 +1,7 @@
 '''Файл со страницами'''
 from django.shortcuts import render, redirect
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import get_user_model, logout, login
 from django.contrib.auth.hashers import check_password, make_password
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -36,7 +37,7 @@ def user_login(request):
             return render(request, 'testblogapp/user_error.html', {"m_error": m_error, 'p_activ': 2,})
         login(request, user)
         if Blogs.objects.filter(user = user).exists() == False:
-            blog = Blogs(user = user, name_blog = 'Блог тест'+str(user.pk))
+            blog = Blogs(user = user, name_blog = 'Блог тест '+str(user.pk))
             blog.save()
         return redirect("testblogapp:str_user", permanent=True)
     else:
@@ -110,6 +111,18 @@ def add_post(request):
     else:
         val_data = {'form_post': form_post,}
         return render(request, 'testblogapp/add_post.html', val_data)
+
+@login_required
+def post_view(request, pk_post):
+    '''Страница поста'''
+    user = request.user
+    try:
+        post = Posts.objects.get(pk = pk_post)
+    except ObjectDoesNotExist:
+        m_error = "К сожалению пост не существует или удален"
+        return render(request, 'testblogapp/user_error.html', {"m_error": m_error, 'p_activ': 2,})
+    val_data = {'post': post,}
+    return render(request, 'testblogapp/post.html', val_data)
 
 @login_required
 def str_blogs(request):
